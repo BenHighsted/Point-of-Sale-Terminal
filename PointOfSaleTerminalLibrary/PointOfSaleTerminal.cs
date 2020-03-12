@@ -8,11 +8,18 @@ namespace PointOfSaleTerminalLibrary
 		public decimal[] valueOfProducts = new decimal[4];
 
 		public const int aDiscountQuantity = 3;
-		public const int cDiscountQuantity = 5;
+		public const int cDiscountQuantity = 6;
 
 		public const decimal aDiscountAmount = 0.75M;
 		public const decimal cDiscountAmount = 1.00M;
 
+		/// <summary>
+		///	This method sets the price of each of the products (i.e. A)
+		/// </summary>
+		/// <param name="A">The new A price</param>
+		/// <param name="B">The new B price</param>
+		/// <param name="C">The new C price</param>
+		/// <param name="D">The new D price</param>
 		public void SetPricing(decimal A, decimal B, decimal C, decimal D)
 		{
 			valueOfProducts[0] = A;
@@ -21,6 +28,10 @@ namespace PointOfSaleTerminalLibrary
 			valueOfProducts[3] = D;
 		}
 
+		/// <summary>
+		/// This method scans a single product in and adds to the array to indicate what was added
+		/// </summary>
+		/// <param name="itemScanned">The input to be added</param>
 		public void ScanProduct(String itemScanned)
 		{
 			if (itemScanned.Equals("A"))
@@ -35,6 +46,10 @@ namespace PointOfSaleTerminalLibrary
 				Console.WriteLine(itemScanned + " is an invalid input so will not be counted towards your total.");
 		}
 
+		/// <summary>
+		/// Calculates the total cost (called after all items have been scanned in) including removing savings
+		/// </summary>
+		/// <returns>Returns the total cost</returns>
 		public decimal CalculateTotal()
 		{
 			decimal total = 0.0M;
@@ -50,11 +65,13 @@ namespace PointOfSaleTerminalLibrary
 				{
 					total -= aDiscountAmount;
 					numberOfProducts[0] -= aDiscountQuantity;
+					Console.WriteLine("A Discount");
 				}
 				else if (numberOfProducts[2] >= cDiscountQuantity)
 				{
 					total -= cDiscountAmount;
 					numberOfProducts[2] -= cDiscountQuantity;
+					Console.WriteLine("C Discount");
 				}
 				else
 					discounts = false;
@@ -65,10 +82,12 @@ namespace PointOfSaleTerminalLibrary
 	}
 	public class App
 	{
-
-		public decimal returnValue = 0; //Used for unit testing
-
-		public void ScanItems(String input)
+		/// <summary>
+		/// This method is used to run all the methods in the library (i.e. for unit tests to call)
+		/// </summary>
+		/// <param name="input">The string input containing what needs to be scanned in</param>
+		/// <returns>Returns the result of calling the CalculateTotal() method</returns>
+		public decimal ScanItems(String input)
 		{
 			String[] inputs = input.Split(',');
 
@@ -80,14 +99,9 @@ namespace PointOfSaleTerminalLibrary
 			}
 			decimal result = terminal.CalculateTotal();
 
-			returnValue = result;
+			Console.WriteLine(input + " totals to: $" + result);
 
-			//Console.WriteLine(input + " totals to: $" + result);
+			return result;
 		}
-
-		public decimal ReturnResult()
-        {
-			return returnValue;
-        }
 	}
 }
