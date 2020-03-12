@@ -65,13 +65,11 @@ namespace PointOfSaleTerminalLibrary
 				{
 					total -= aDiscountAmount;
 					numberOfProducts[0] -= aDiscountQuantity;
-					Console.WriteLine("A Discount");
 				}
 				else if (numberOfProducts[2] >= cDiscountQuantity)
 				{
 					total -= cDiscountAmount;
 					numberOfProducts[2] -= cDiscountQuantity;
-					Console.WriteLine("C Discount");
 				}
 				else
 					discounts = false;
