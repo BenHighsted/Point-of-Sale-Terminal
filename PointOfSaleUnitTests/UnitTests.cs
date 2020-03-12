@@ -6,42 +6,82 @@ namespace PointOfSaleUnitTests
 	[TestClass]
 	public class BaseTests
 	{
-        //Methods to test valid inputs
+		//Methods to test valid inputs
 		[TestMethod]
 		public void TestBaseCase1()
 		{
 			App runCode = new App();
-			runCode.ScanItems("A,B,C,D,A,B,A");
-			Assert.AreEqual(13.25M, runCode.ReturnResult());
+			Assert.AreEqual(13.25M, runCode.ScanItems("A,B,C,D,A,B,A"));
 		}
 		[TestMethod]
 		public void TestBaseCase2()
 		{
 			App runCode = new App();
-			runCode.ScanItems("C,C,C,C,C,C,C");
-			Assert.AreEqual(6.00M, runCode.ReturnResult());
+			Assert.AreEqual(6.00M, runCode.ScanItems("C,C,C,C,C,C,C"));
 		}
 		[TestMethod]
 		public void TestBaseCase3()
 		{
 			App runCode = new App();
-			runCode.ScanItems("A,B,C,D");
-			Assert.AreEqual(7.25M, runCode.ReturnResult());
+			Assert.AreEqual(7.25M, runCode.ScanItems("A,B,C,D"));
 		}
-		//Methods to test bad inputs
+	}
+
+	[TestClass]
+	public class BadInputs 
+	{ 
 		[TestMethod]
 		public void TestNoInput()
 		{
 			App runCode = new App();
-			runCode.ScanItems("");
-			Assert.AreEqual(0M, runCode.ReturnResult());
+			Assert.AreEqual(0M, runCode.ScanItems(""));
 		}
 		[TestMethod]
 		public void TestInvalidInput()
 		{
 			App runCode = new App();
-			runCode.ScanItems("E, F, G");
-			Assert.AreEqual(0M, runCode.ReturnResult());
+			Assert.AreEqual(0M, runCode.ScanItems("E,F,G"));
+		}
+		[TestMethod]
+		public void TestInvalidAndValidInput()
+		{
+			App runCode = new App();
+			Assert.AreEqual(19.00M, runCode.ScanItems("E,A,B,F,G,A,C,D,D,D,B,B,E,X,Z,V,A"));
+		}
+		[TestMethod]
+		public void TestInvalidAndValidInput2()
+		{
+			App runCode = new App();
+			Assert.AreEqual(0M, runCode.ScanItems("E,F,G"));
+		}
+	}
+
+	[TestClass]
+	public class ManyInputs
+	{
+		[TestMethod]
+		public void TestMutipleDealsInputs()
+		{
+			App runCode = new App();
+			Assert.AreEqual(9.00M, runCode.ScanItems("A,A,A,A,A,A,A,A,A"));
+		}
+		[TestMethod]
+		public void TestMutipleDealsInputs2()
+		{
+			App runCode = new App();
+			Assert.AreEqual(15.00M, runCode.ScanItems("C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C"));
+		}
+		[TestMethod]
+		public void TestMutipleDealsInputs3()
+		{
+			App runCode = new App();
+			Assert.AreEqual(13.00M, runCode.ScanItems("C,C,C,C,C,C,A,A,A,B,D"));
+		}
+		[TestMethod]
+		public void HugeAmount()
+		{
+			App runCode = new App();
+			Assert.AreEqual(69.25M, runCode.ScanItems("A,B,C,D,A,B,C,D,A,B,C,D,A,B,C,D,A,B,C,D,A,B,C,D,A,B,C,D,A,B,C,D,A,B,C,D,A,B,C,D"));
 		}
 	}
 }
