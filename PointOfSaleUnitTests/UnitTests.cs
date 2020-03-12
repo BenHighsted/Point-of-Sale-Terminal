@@ -30,6 +30,7 @@ namespace PointOfSaleUnitTests
 	[TestClass]
 	public class BadInputs 
 	{ 
+		//Methods to test inputs with all/some invalid inputs
 		[TestMethod]
 		public void TestNoInput()
 		{
@@ -52,13 +53,14 @@ namespace PointOfSaleUnitTests
 		public void TestInvalidAndValidInput2()
 		{
 			App runCode = new App();
-			Assert.AreEqual(0M, runCode.ScanItems("E,F,G"));
+			Assert.AreEqual(7.25M, runCode.ScanItems("E,F,A,B,Z,X,D,C,G,G"));
 		}
 	}
 
 	[TestClass]
 	public class ManyInputs
 	{
+		//Methods that test large inputs
 		[TestMethod]
 		public void TestMutipleDealsInputs()
 		{

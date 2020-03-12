@@ -16,10 +16,10 @@ namespace PointOfSaleTerminalLibrary
 		/// <summary>
 		///	This method sets the price of each of the products (i.e. A)
 		/// </summary>
-		/// <param name="A">The new A price</param>
-		/// <param name="B">The new B price</param>
-		/// <param name="C">The new C price</param>
-		/// <param name="D">The new D price</param>
+		/// <param name="A">The new price of product 'A'</param>
+		/// <param name="B">The new price of product 'B'</param>
+		/// <param name="C">The new price of product 'C'</param>
+		/// <param name="D">The new price of product 'D'</param>
 		public void SetPricing(decimal A, decimal B, decimal C, decimal D)
 		{
 			valueOfProducts[0] = A;
@@ -99,7 +99,7 @@ namespace PointOfSaleTerminalLibrary
 			}
 			decimal result = terminal.CalculateTotal();
 
-			Console.WriteLine(input + " totals to: $" + result);
+			Console.WriteLine(input + " totals to: $" + result); //Used for testing purposes, not needed for final product.
 
 			return result;
 		}
